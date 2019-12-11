@@ -1,0 +1,10 @@
+<!-- Solution using NgNodel -->
+<!-- <input [(ngModel)]="input" (keyup)="toTitleCase()" /> -->
+<!-- <br> -->
+<!-- <p> {{ titleCase }} </p> -->
+
+
+<!-- Solution using a custom pipe -->
+<input [(ngModel)]="input" />
+<br>
+{{ input | lowercase | titlecase }}

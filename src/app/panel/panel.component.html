@@ -1,0 +1,14 @@
+<!-- To provide custom content to our reusable component, use ng-content -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <ng-content select=".heading"></ng-content>
+        <!-- the ng-content tag will be replaced by the '.heading' class -->
+        <!-- the select attribute is optional if there is just one ng-content tag.  -->
+    </div>
+    <div class="panel-body">
+        
+        <ng-content select=".body"></ng-content>
+    </div>
+</div>
+<!-- The above snippet was generated using the markup "div.panel.panel-default>div.panel-heading+div.panel-body". Then press 'tab' -->
+<!-- This is called zen coding syntax -->

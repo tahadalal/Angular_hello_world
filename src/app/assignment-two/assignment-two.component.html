@@ -1,0 +1,16 @@
+<!-- <style>
+.glyphicon {
+    color: blue;
+}
+</style> -->
+<!-- The style can be added in the HTML directly as well (as above) -->
+
+<span 
+class="glyphicon" 
+[class.glyphicon-star.active]="isActive"
+[class.glyphicon-star-empty.active]="!isActive"
+(click)="onClick()">
+</span>
+
+<span class="glyphicon glyphicon-user">
+</span>

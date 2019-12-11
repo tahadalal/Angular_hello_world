@@ -1,0 +1,6 @@
+<ng-content select=".tweet-title"></ng-content> <br>
+<span class="glyphicon glyphicon-heart like-icon"
+[class.highlight]="isActive"
+(click)="onClick($event)">
+</span> 
+<ng-content select=".tweet-count"></ng-content>

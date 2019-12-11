@@ -1,0 +1,19 @@
+<div class="media">
+    <h1>My Followers</h1>
+    <div *ngFor="let follower of followers" >
+        <div class="media-left">
+            <a href="#">
+                <img class="avatar media-object" src="{{follower.avatar_url}}">
+            </a>
+        </div>
+        <div class="media-body">
+            <a href="#"> 
+                <h4 class="media-heading">{{follower.login}}</h4>
+            </a>
+            <a [routerLink]="['/followers',follower.id,follower.login]">{{follower.html_url}}</a>
+            <!-- the routerlink attribute is bound to an expression. the first parameter is the route and the following ones are path parameters -->
+            <!-- for simple routes, use : routerLink="/posts" -->
+            <!-- for synamic routes, use the expression : [routerLink]="['/followers',follower.id]" -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<h1>Hello World !! </h1>
+<app-assignment-two [is-active]="post.isFavourite" (change)="onFavouriteChange($event)"></app-assignment-two>
+<!-- For a component to be reusable, it should have an input and and output -->
+
+<!-- All the templates are bundled into the same main.bundle.js before being sent to the browser  -->
+
+<app-panel>
+    <div class="heading">Some Heading</div>
+    <ng-container class="heading">Heading3</ng-container>
+    <!-- Using the ng-container avoid the use of an additional div element -->
+    <div class="body">
+        <h2>Heading2</h2>
+        <p>Some text...</p>
+    </div>
+</app-panel>
+
+<app-like 
+[isActive]="tweet.isLiked" (click)="onClick($event)">
+<ng-container class="tweet-title">{{ tweet.text }}</ng-container>
+<ng-container class="tweet-count">{{ tweet.likesCount }}</ng-container>
+</app-like>
+
+<br>
+
+<app-like-two
+[likesCount]="tweet.likesCount"
+[isActive]="tweet.isLiked">
+</app-like-two>
+

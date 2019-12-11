@@ -1,0 +1,158 @@
+<!-- Option 1 -->
+<div *ngIf="courses.length > 0">
+    <!-- ngIf can also call a method  -->
+    <!-- if the condition evaluates to false, the element is removed from the DOM, else it is added  -->
+    List of Courses
+</div>
+<div *ngIf="courses.length == 0">
+    No Courses yet
+</div>
+<br>
+
+<!-- Option 2 -->
+<div *ngIf="courses.length > 0; else noCourses">
+    List of Courses
+</div>
+<ng-template #noCourses >
+    <!-- This is the new syntax (approach) starting from angular 4 -->
+    No Courses yet
+</ng-template>
+<br>
+
+<!-- Option 3 -->
+<div *ngIf="courses.length > 0; then coursesList else noCourses1">
+</div>
+<ng-template #coursesList >
+    List of Courses
+</ng-template>
+<ng-template #noCourses1 >
+    No Courses yet
+</ng-template>
+
+
+<!-- option 4 - without using ng directives -->
+<!-- Using hidden attribute, will only hide the element but it would be present in the DOM (this is unlike ngIf behaviour) -->
+<!-- Because this element exists in the DOM, the size would increase and angular will have to watch these elements also for changes  -->
+<!-- But if the element has to be displayed optionally , it is better to hide than to create it (on the fly) if it is costly to create -->
+
+<div [hidden]="courses.length == 0">
+    List of Courses
+</div>
+<div [hidden]="courses.length > 0">
+    No Courses yet
+</div>
+<br>
+
+<!-- ngSwitchCase -->
+<ul class="nav nav-pills"> <!-- generated using the zen coding syntax "ul.nav.nav-pills" -->
+    <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'" >Map View</a></li> <!-- zen coding syntax "(li>a)*2" -->
+    <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'" >List View</a></li>
+</ul>
+<div [ngSwitch]="viewMode" >
+    <div *ngSwitchCase="'map'">Map View Content</div>
+    <div *ngSwitchCase="'list'">List View Content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+</div>
+<br>
+
+<!-- ngFor -->
+<ul >
+    <li *ngFor="let course of courses2; index as i; even as isEven "> 
+        {{ i }} -- {{ course.name }} -- <span *ngIf="isEven">(EVEN)</span>
+        <button (click)="onRemove(course)">Remove Course</button>
+        <button (click)="onChange(course)">Change Course</button>
+    </li> <!-- here index has an alias 'i' -->
+    <!-- ngFor also exports a bunch of values eg : index-->
+    <!-- https://angular.io/api/common/NgForOf#local-variables -->
+    
+</ul>
+<br>
+
+
+<button (click)="onAdd()">Add Course</button>
+<!-- Angular has change detection . eg : button click, ajax request / timer complete etc.-->
+<!-- Angular will refresh the DOM automatically -->
+<br>
+
+
+<!-- trackBy -->
+<!-- Using trackBy allows us to customize the tracking of objects. By default it is tracked by memory location -->
+<button (click)="loadCourses()">Load Courses</button>
+<!-- Every time a view is re-rendered in the browser, the element is highlighted in purple momentarily -->
+<ul >
+    <li *ngFor="let course of courses3; trackBy: trackCourse"> 
+        {{ course.name }}
+    </li> 
+</ul>
+<br>
+
+
+<!-- The leading asterisk * for ng directives -->
+<div *ngIf="courses.length > 0">
+    List of Courses
+</div>
+<!-- The above syntax is translated as below by angular -->
+<ng-template [ngIf]="courses.length > 0" >
+    <div>
+        List of Courses
+    </div>
+</ng-template>
+<br>
+
+<!-- ngClass -->
+<span 
+class="glyphicon" 
+[ngClass]="{
+    'glyphicon-star' : isActive,
+    'glyphicon-star-empty' : !isActive
+}"
+(click)="onClick()">
+<!-- [class.glyphicon-star.active]="isActive" -->
+<!-- [class.glyphicon-star-empty.active]="!isActive" -->
+<!-- ngClass replaces the above syntax -->
+</span>
+<br>
+    
+
+<!-- ngStyle -->
+<button
+[style.backgroundColor]="canSave ? 'blue' : 'gray'"
+[style.color]="canSave ? 'white' : 'black'"
+[style.fontWeight]="canSave ? 'bold' : 'normal'"
+>
+Save
+</button>
+<!-- The above button can be written as below -->
+<button
+[ngStyle]="{
+'backgroundColor': canSave ? 'blue' : 'gray',
+'color' : canSave ? 'white' : 'black',
+'fontWeight' : canSave ? 'bold' : 'normal'
+}"
+>
+Save2
+</button>
+<br>
+
+
+
+<!-- Safe Traversal Operator : This allows us to handle nulls during nested object traversal -->
+<!-- <span>{{ task.assignee.name }}</span> <br>  -->
+<!-- The above line gives an error if task.assignee is null -->
+<!-- Here is one way to solve it -->
+<span *ngIf="task.assignee">{{ task.assignee.name }}</span> <br>
+<!-- A better way to do this is as below -->
+<span>{{ task.assignee?.name }}</span> <br> <br>
+
+
+
+
+<!-- Custom directive -->
+<!-- <input type="text" appInputFormat [format]="'uppercase'"> -->
+<!-- A cleaner approach of doing this is as below -->
+<input type="text" [appInputFormat]="'uppercase'"> <br>
+
+
+<!-- Assignment 5 -->
+<app-zippy [title]="'Shipping Details'">Shipping Details Content</app-zippy>
+<app-zippy title="Billing Details">Billing Details Content</app-zippy> <!-- for static values, the attribute need not be bound , it can be set without the square brackets '[]' -->

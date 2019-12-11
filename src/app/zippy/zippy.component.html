@@ -1,0 +1,15 @@
+<!-- Generated using zen coding "div.panel.panel-default>(div.panel-heading+div.panel-body)*2" -->
+<div class="panel panel-default">
+    <div class="panel-heading" (click)="isSelected = !isSelected">
+        {{ title }}
+        <span class="glyphicon"
+        [ngClass]="{
+            'glyphicon-chevron-up': isSelected,
+            'glyphicon-chevron-down': !isSelected
+        }">
+        </span>
+    </div>
+    <div class="panel-body" *ngIf="isSelected">
+        <ng-content></ng-content> <!-- Angular will replace the ng-content with the content of this component's tag. -->
+    </div>
+</div>
