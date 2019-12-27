@@ -1,3 +1,6 @@
+This repository is created as part of learning the udemy course : https://www.udemy.com/course/angular-crash-course/
+It contains notes and comments of the course as well alongside the code.
+
 # HelloWorld
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
