@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <!-- <li class="active"><a href="/followers">Followers</a></li> -->
+            <!-- We should avoid using the href="/followers" attribute because this will reload (startup) the entire application again, which is costly -->
+            <!-- Instead we should use the routerLink attribute -->
+            <!-- On using the routerLink, only the router-outlet is reloaded and not the entire application. -->
+            <!-- Use th network tab in chrome debugger to figure out what files were downloaded. There are separate tabs for JS, CSS etc. -->
+            <li routerLinkActive="active current">
+                <a routerLink="/followers" 
+                    [queryParams]="{page:1,order:'newest '}">Followers</a>
+            </li>
+            <!-- instead of using the class="active" , use routerLinkActive to apply the classes only to the currently active component.-->
+            <li routerLinkActive="active"><a routerLink="/posts">Posts</a></li>
+            <!-- This is called an SPA (single page application). -->
+        </ul>
+        </div>
+    </div>
+</nav>

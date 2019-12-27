@@ -1,0 +1,65 @@
+<form #f="ngForm" (ngSubmit)="submit(f)"> 
+<!-- ngForm COmponent is applied here to the form tag -->
+    <div ngModelGroup="contact" #contact="ngModelGroup">
+        <div *ngIf="contact.touched && !contact.valid">Some groups failure messages</div>
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input required minlength="3" maxlength="10" pattern="banana" ngModel name="firstName" 
+            #firstName="ngModel" 
+            (change)="log(firstName)" id="firstName" type="text" class="form-control">
+            <!-- To use the template driven validation approach, you only need "ngModel name="firstName"" -->
+            <!-- #firstName is the template variable and the value is ngModel. This instructs angular to set the variable on the angular directive.  -->
+            <!-- on using ngModel directive, a formControl class is created and applied on the input field  -->
+            <!-- The 'required' attribute tells the HTML form that this field is required. -->
+            <!-- The 'pattern' attribute can be used for regex verification -->
+            <!-- The red border is a result of the style.css class which has explicit style to turn the border red -->
+            <!-- The attribute '#firstName="ngModel"' gives access to the ngModel directive which is then used in other tags -->
+            <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+                <div *ngIf="firstName.errors.required">First Name is required.</div>
+                <div *ngIf="firstName.errors.minlength">
+                    First Name should be minimum {{ firstName.errors.minlength.requiredLength }} charatcters.
+                    Please add {{ firstName.errors.minlength.requiredLength - firstName.errors.minlength.actualLength}} more characters.
+                </div>
+                <div *ngIf="firstName.errors.pattern">First Name does not match the pattern.</div>
+            </div>
+            <!-- The ngIf directive is used to display the alert text -->
+            <!-- the 'firstName.touched' is to avoid displaying the alert when the page loads -->
+        </div>
+    </div>
+    
+    <!-- zen code "div.form-group>label[for='comment']+textarea[id='comment'].form-control" -->
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea ngModel name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+    <div class="checkbox">
+        <label for="">
+            <input type="checkbox" ngModel name="isSubscribed"> Subscribe to mailing list
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="contactMethod">Contact Method</label>
+        <select multiple ngModel name="contactMethod" id="contactMethod" class="form-control">
+            <!-- the 'multiple' attribute allows multiple selections from the dropdown -->
+            <!-- <option value=""></option> -->
+            <!-- using the option tag is the old way of implementation -->
+            <option value=""></option>
+            <option *ngFor="let method of contactMethods" [ngValue]="method">{{ method.name }}</option>
+            <!-- Using the ngValue attribute allows non-string objects to be set as the 'value' -->
+        </select>
+     </div>
+    <div *ngFor="let method of contactMethods" class="radio">
+        <label for="">
+            <input ngModel type="radio" name="contactMethod1" [value]="method.id">
+            {{method.name}}
+        </label>
+    </div>
+    
+    <p>
+        {{ f.value | json }}
+        <!-- the json pipe is used to convert to json. Use for diangonosis -->
+    </p>
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
+<!-- FormControl is an HTML object. A FormControl object will be created by the angular directive -->
+<!-- The HTML format should be set in a way in which the entire line is visible on the screen and no sideways scrolling is required.-->
