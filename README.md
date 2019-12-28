@@ -28,3 +28,6 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Troubleshooting
+When trying to run the `npm install`, the command fails, because a script in angular CLI is not found. On checking, the CLI folder is missing locally, but is present globally. To solve this, I have copied the CLI folder from the global node modules to the local node modules folder. 
